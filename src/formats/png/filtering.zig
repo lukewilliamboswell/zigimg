@@ -149,9 +149,9 @@ fn average(a: u9, b: u9) u8 {
 
 fn paeth(b4: u8, up: u8, b4_up: u8) u8 {
     const p: i16 = @as(i16, @intCast(b4)) + up - b4_up;
-    const pa = @abs(p - b4);
-    const pb = @abs(p - up);
-    const pc = @abs(p - b4_up);
+    const pa: u8 = @intCast(abs(p - b4));
+    const pb: u8 = @intCast(abs(p - up));
+    const pc: u8 = @intCast(abs(p - b4_up));
 
     if (pa <= pb and pa <= pc) {
         return b4;
@@ -159,6 +159,14 @@ fn paeth(b4: u8, up: u8, b4_up: u8) u8 {
         return up;
     } else {
         return b4_up;
+    }
+}
+
+fn abs(x: i16) i16 {
+    if (x < 0) {
+        return -x;
+    } else {
+        return x;
     }
 }
 
